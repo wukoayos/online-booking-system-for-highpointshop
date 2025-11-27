@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: online-booking-system-for-highpointshop
+    env: node
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: ADMIN_PASSWORD
+        value: demo123
+      - key: FRONTEND_URL
+        value: https://online-booking-system-for-highpointshop-y392.onrender.com
+      - key: PORT
+        value: 3000
+
+  - type: web
+    name: online-booking-system-for-highpointshop-frontend
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://online-booking-system-for-highpointshop.onrender.com/api

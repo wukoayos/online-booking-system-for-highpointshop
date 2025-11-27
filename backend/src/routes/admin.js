@@ -60,15 +60,11 @@ router.post('/login', [
 
     // STLC: [Compare_With_Environment_Password]
     // operation: STRING_COMPARE, security_critical: true
-    const adminPassword = process.env.ADMIN_PASSWORD;
+    // Use environment variable or fallback to default (demo only)
+    const adminPassword = process.env.ADMIN_PASSWORD || 'demo123';
 
-    if (!adminPassword) {
-      // STLC: [Error_Configuration] - Admin password not configured
-      console.error('ADMIN_PASSWORD not set in environment');
-      return res.status(500).json({
-        success: false,
-        error: 'Server configuration error'
-      });
+    if (!process.env.ADMIN_PASSWORD) {
+      console.warn('⚠️  ADMIN_PASSWORD not set, using default password (demo123)');
     }
 
     // STLC: [Branch_Password_Match]
