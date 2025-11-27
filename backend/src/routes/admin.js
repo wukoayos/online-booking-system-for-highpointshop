@@ -118,8 +118,9 @@ const checkAuth = (req, res, next) => {
   // STLC: [Validate_Bearer_Token]
   // Demo-only: Just check if the password is sent in Authorization header
   const token = authHeader.replace('Bearer ', '');
+  const adminPassword = process.env.ADMIN_PASSWORD || 'demo123';
 
-  if (token !== process.env.ADMIN_PASSWORD) {
+  if (token !== adminPassword) {
     // STLC: [Return_Error_401] - Invalid token
     return res.status(401).json({
       success: false,
